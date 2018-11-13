@@ -2,7 +2,7 @@
 var canvas = document.getElementById('canvas')
 console.log(canvas)
 var ctx = canvas.getContext('2d')
-
+var frames = 0;
 //clases
 function Element(x,y,src){
     this.x= x

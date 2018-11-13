@@ -13,16 +13,18 @@ var elements= {
 var bckg = new Background(0,0,elements.bckg);
 var warriror = new Warrior(0,325,0,0,elements.warrior)
 var intervalo;
-var frames= 0;
 //main functions
 function start() {
-    intervalo.setInterval(update,1000/60);
+    if(!intervalo) intervalo = setInterval(update,1000/3)
 }
 function update(){
     frames++
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    /*if(frames%150 === 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }*/
     bckg.draw()
     warriror.draw()
+    console.log(frames);
 }
 //aux functions
 
@@ -31,5 +33,5 @@ function update(){
 //run
 window.onload = function () {
     console.log('waitting')
-    update()
+    start()
 }

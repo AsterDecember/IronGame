@@ -16,16 +16,32 @@ function Character(sx,sy,dx,dy,src){
     this.image.onload = function () {
         this.draw()
     }.bind(this)
-    this.count = 0
+    this.count = 1
     this.draw = function () {
-        this.count++
-        this.dx=(this.dx*this.count)/8
-        //ctx.drawImage(this.image,this.dx,this.dy,150,200,0,0,150,200)
-        ctx.drawImage(this.image, this.sx, this.sy, this.sWidth, this.sHeight, this.dx, this.dy, this.dWidth, this.dHeight)
+        /*this.count++
+        this.sx=(this.sx+this.dWidth)/8*/
+        console.log('entro');
+        //var hw = 90;
+        //ctx.drawImage(this.image, this.sx, this.sy, this.sWidth, this.sHeight, this.dx, this.dy, this.dWidth, this.dHeight)
+            console.log('dibujando'+frames);
+            //this.sx += this.width;
+
+            //ctx.drawImage(this.image,this.dx,this.dy,150,200,0,0,150,200)
+            ctx.drawImage(this.image, this.sx, this.sy*cont, this.sWidth, this.sHeight, this.dx, this.dy, this.dWidth, this.dHeight)
+            cont++;
     }
 }
+var cont=0;
+/*this.draw = function(){
 
+    if(frames%10===0) {
+        this.frameIndex++
 
+    }
+    if(this.frameIndex > this.numberOfFrames-1) this.frameIndex =0
+    ctx.drawImage(this.image,this.frameIndex * this.width / this.numberOfFrames,0,this.width / this.numberOfFrames,this.height,this.x,this.y,this.width / this.numberOfFrames,
+        this.height)
+}*/
 
 
 function Suport() {
