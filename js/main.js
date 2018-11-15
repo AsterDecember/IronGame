@@ -13,8 +13,8 @@ var elements= {
 
 //instances
 var bckg = new Background(0,0,elements.bckg);
-var warrior1 = new Warrior(0,325,800,300,90,90,elements.royal)
-var warrior2 = new Warrior(0,310,0,300,90,90,elements.royal)
+var warrior1 = new Warrior(0,325,800,300,90,90,elements.royal,10,10)
+var warrior2 = new Warrior(0,310,0,300,90,90,elements.royal,700,10)
 var intervalo;
 var titles = []
 //main functions

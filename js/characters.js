@@ -1,12 +1,15 @@
 var images = {
-    normalIceAtk : 'images/atacks/iceAtack.png'
+    normalIceAtk : 'images/atacks/iceAtack.png',
+    hp           : 'images/hpStatus.png'
 }
 
 
 //charecter clases
-function Character(sx,sy,dx,dy,width,height,src,){
+function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP){
     this.health = 100
     this.damage = 20
+    this.dxHP = dxHP
+    this.dyHP = dyHP
     this.sx = sx
     this.sy = sy
     this.sWidth = width
@@ -17,6 +20,11 @@ function Character(sx,sy,dx,dy,width,height,src,){
     this.xRef = dx+(width/2)
     this.yRef = dy+(width/2)
     this.mode = 6
+    this.imgHp = new Image()
+    this.imgHp.src = images.hp
+    this.imgHp.onload = function () {
+
+    }
     this.image = new Image()
     this.image.src = src
     this.image.onload = function () {
@@ -27,6 +35,10 @@ function Character(sx,sy,dx,dy,width,height,src,){
     this.acc =0 ;
     this.accD =0 ;
     this.draw = function () {
+        ctx.drawImage(this.imgHp,0,0,95, 10,this.dxHP, this.dyHP, 200, 20)
+        console.log(this.imgHp)
+        console.log(this.dxHP)
+        console.log(this.dyHP)
         switch (this.mode) {
             case 1://up
                 this.watching = 1
@@ -93,17 +105,7 @@ function Character(sx,sy,dx,dy,width,height,src,){
     this.imgAtack.src = images.normalIceAtk
     this.atack = function () {
         this.mode=5
-        if(this.watching = 3){
-            ctx.drawImage(this.imgAtack,this.damageX,this.damageY,this.damageW,this.damageH)
-        }
-        switch (this.watching) {
-            case 5:
-                ctx.drawImage(this.imgAtack,this.damageX,this.damageY,this.damageW,this.damageH)
-                break
-            case 4:
-                ctx.drawImage(this.imgAtack,this.damageXR,this.damageYR,this.damageW,this.damageH)
-                break
-        }
+        ctx.drawImage(this.imgAtack,this.damageX,this.damageY,this.damageW,this.damageH)
         setTimeout(()=> this.mode=6, 3000);
         return this.damage
     }
@@ -119,15 +121,9 @@ function Character(sx,sy,dx,dy,width,height,src,){
             this.mode=8
             return true
         }
+
         //console.log(this.health)
         return false
-    }
-    this.move = function () {
-        if(this.moves >0){
-            this.moves--
-        }else{
-            this.moves-=acc;
-        }
     }
     this.endTurn = function () {
         this.moves =5
@@ -138,8 +134,8 @@ function Character(sx,sy,dx,dy,width,height,src,){
 function Suport() {
 
 }
-function Warrior(sx,sy,dx,dy,width,height,src) {
-    Character.call(this,sx,sy,dx,dy,width,height,src)
+function Warrior(sx,sy,dx,dy,width,height,src,dxHP,dyHP) {
+    Character.call(this,sx,sy,dx,dy,width,height,src,dxHP,dyHP)
     this.name = 'warrior'
 }
 function Magician() {
