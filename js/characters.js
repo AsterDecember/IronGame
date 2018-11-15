@@ -5,9 +5,9 @@ var images = {
 
 
 //charecter clases
-function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP){
-    this.health = 100
-    this.damage = 20
+function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc){
+    this.health = 160
+    this.damage = 10
     this.dxHP = dxHP
     this.dyHP = dyHP
     this.sx = sx
@@ -22,9 +22,8 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP){
     this.mode = 6
     this.imgHp = new Image()
     this.imgHp.src = images.hp
-    this.imgHp.onload = function () {
-
-    }
+    this.hpAcc = 1
+    this.hpW = 9.98
     this.image = new Image()
     this.image.src = src
     this.image.onload = function () {
@@ -35,10 +34,8 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP){
     this.acc =0 ;
     this.accD =0 ;
     this.draw = function () {
-        ctx.drawImage(this.imgHp,0,0,95, 10,this.dxHP, this.dyHP, 200, 20)
-        console.log(this.imgHp)
-        console.log(this.dxHP)
-        console.log(this.dyHP)
+        ctx.drawImage(this.imgHp,0,this.hpAcc,95,this.hpW,this.dxHP, this.dyHP, 200, 20)
+        console.log('elemento:'+this.hpAcc)
         switch (this.mode) {
             case 1://up
                 this.watching = 1
@@ -67,6 +64,7 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP){
                 break
             case 7:
                 //TODO:recieve damage
+                this.hpAcc+= (this.hpW*2)
                 ctx.drawImage(this.image,790, 370, this.sWidth, this.sHeight, this.dx, this.dy, this.dWidth, this.dHeight)
                 break
             case 8:
@@ -78,6 +76,10 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP){
         this.acc+= this.sWidth
         this.count++;
         this.countD++;
+        if(this.hpW>31){
+            console.log('gameOver')
+            //this.hpAcc
+        }
         if(this.count>7){
             this.acc= 0;
             this.count=1;
@@ -102,7 +104,7 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP){
             return true
         }
     }
-    this.imgAtack.src = images.normalIceAtk
+    this.imgAtack.src = typesrc
     this.atack = function () {
         this.mode=5
         ctx.drawImage(this.imgAtack,this.damageX,this.damageY,this.damageW,this.damageH)
@@ -134,8 +136,8 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP){
 function Suport() {
 
 }
-function Warrior(sx,sy,dx,dy,width,height,src,dxHP,dyHP) {
-    Character.call(this,sx,sy,dx,dy,width,height,src,dxHP,dyHP)
+function Warrior(sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc) {
+    Character.call(this,sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc)
     this.name = 'warrior'
 }
 function Magician() {

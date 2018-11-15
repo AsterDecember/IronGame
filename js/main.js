@@ -5,6 +5,8 @@ var elements= {
     guillotine: 'images/guillotinecrossWHITE.png',
     title : 'images/square.png',
     normalIceAtk : 'images/atacks/normalIceAtack.png',
+    fire: 'images/atacks/fireAtack.png',
+    ice: 'images/atacks/iceAtack.png',
 }
 
 //variables
@@ -13,8 +15,8 @@ var elements= {
 
 //instances
 var bckg = new Background(0,0,elements.bckg);
-var warrior1 = new Warrior(0,325,800,300,90,90,elements.royal,10,10)
-var warrior2 = new Warrior(0,310,0,300,90,90,elements.royal,700,10)
+var warrior1 = new Warrior(0,325,800,300,90,90,elements.royal,10,10,elements.ice)
+var warrior2 = new Warrior(0,310,0,300,90,90,elements.royal,700,10,elements.fire)
 var intervalo;
 var titles = []
 //main functions
@@ -96,7 +98,7 @@ window.onload = function () {
                 warrior1.xRef -= 100
                 warrior1.mode = 4
                 break
-            case 32:
+            case 190:
                 //space
                 warrior1.atack();
                 if(warrior1.isTouching(warrior2.xRef,warrior2.yRef)){
