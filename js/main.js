@@ -13,8 +13,8 @@ var elements= {
 
 //instances
 var bckg = new Background(0,0,elements.bckg);
-var warrior1 = new Warrior(0,325,800,600,90,90,elements.royal)
-var warrior2 = new Warrior(0,310,0,600,90,90,elements.royal)
+var warrior1 = new Warrior(0,325,800,300,90,90,elements.royal)
+var warrior2 = new Warrior(0,310,0,300,90,90,elements.royal)
 var intervalo;
 var titles = []
 //main functions
@@ -57,7 +57,7 @@ function gameOver(){
     ctx.font = "bold 40px Arial"
     //ctx.fillText("Tu score: " + Math.floor(frames/60), 200,300)
     ctx.font = "bold 20px Arial"
-    ctx.fillText("Presiona 'Return' para reiniciar", 50,350)
+    //ctx.fillText("Presiona 'Return' para reiniciar", 50,350)
     /*audio.src=music.lost
     audio.play()*/
 }

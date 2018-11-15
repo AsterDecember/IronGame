@@ -7,16 +7,15 @@ var images = {
 function Character(sx,sy,dx,dy,width,height,src,){
     this.health = 100
     this.damage = 20
-    this.xRef = dx+(width/2)
-    this.yRef = dy+(width/2)
     this.sx = sx
     this.sy = sy
     this.sWidth = width
     this.sHeight = height
     this.dx = dx
     this.dy = dy
-
-
+    //reference to recieve damage
+    this.xRef = dx+(width/2)
+    this.yRef = dy+(width/2)
     this.mode = 6
     this.image = new Image()
     this.image.src = src
@@ -63,7 +62,6 @@ function Character(sx,sy,dx,dy,width,height,src,){
                 ctx.drawImage(this.image,960, 380, this.sWidth, this.sHeight, this.dx, this.dy, this.dWidth, this.dHeight)
                 break
         }
-        //ctx.drawImage(this.image, this.acc, this.sy, this.sWidth, this.sHeight, this.dx, this.dy, this.dWidth, this.dHeight)
         this.accD +=110  //110
         this.acc+= this.sWidth
         this.count++;
@@ -79,10 +77,13 @@ function Character(sx,sy,dx,dy,width,height,src,){
     }
     this.moves = 5
     this.watching = 0
+    //Damage functions
     this.dWidth = width
     this.dHeight = height
     this.damageX = this.dx-130
+    this.damageXR = this.dx+130
     this.damageY = this.dy-100
+    this.damageYR = this.dy-100
     this.damageH = 240
     this.damageW = 160
     this.imgAtack = new Image()
@@ -90,15 +91,20 @@ function Character(sx,sy,dx,dy,width,height,src,){
         if((xRef > this.damageX && xRef<(this.damageX+this.damageW)) && (yRef>this.damageY && (yRef<(this.damageH+this.damageY))) ){
             return true
         }
-
-
-
     }
     this.imgAtack.src = images.normalIceAtk
     this.atack = function () {
         this.mode=5
         if(this.watching = 3){
             ctx.drawImage(this.imgAtack,this.damageX,this.damageY,this.damageW,this.damageH)
+        }
+        switch (this.watching) {
+            case 5:
+                ctx.drawImage(this.imgAtack,this.damageX,this.damageY,this.damageW,this.damageH)
+                break
+            case 4:
+                ctx.drawImage(this.imgAtack,this.damageXR,this.damageYR,this.damageW,this.damageH)
+                break
         }
         setTimeout(()=> this.mode=6, 3000);
         return this.damage
