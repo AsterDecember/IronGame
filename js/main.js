@@ -99,11 +99,15 @@ window.onload = function () {
                 warrior1.mode = 4
                 break
             case 190:
-                //space
-                warrior1.atack();
-                if(warrior1.isTouching(warrior2.xRef,warrior2.yRef)){
-                    if(warrior2.recieveDamage(warrior1.atack())){
-                        gameOver()
+                //dot .
+                if(!warrior1.atackFlag) {
+                    warrior1.atackFlag = true
+                    setTimeout(() => warrior1.atackFlag = false,1500)
+                    warrior1.atack();
+                    if (warrior1.isTouching(warrior2.xRef, warrior2.yRef)) {
+                        if (warrior2.recieveDamage(warrior1.atack())) {
+                            gameOver()
+                        }
                     }
                 }
                 break
@@ -144,9 +148,15 @@ window.onload = function () {
                 break
             case 81:
                 //Q
-                warrior2.atack();
-                if(warrior2.isTouching(warrior1.xRef,warrior1.yRef)){
-                    console.log(warrior1.recieveDamage(warrior2.atack()))
+                if(!warrior2.atackFlag) {
+                    warrior2.atackFlag = true
+                    setTimeout(() => warrior2.atackFlag = false,1500)
+                    warrior2.atack();
+                    if (warrior2.isTouching(warrior1.xRef, warrior1.yRef)) {
+                        if (warrior1.recieveDamage(warrior2.atack())) {
+                            gameOver()
+                        }
+                    }
                 }
                 break
             case 90:

@@ -16,6 +16,7 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc){
     this.sHeight = height
     this.dx = dx
     this.dy = dy
+    this.atackFlag = false
     //reference to recieve damage
     this.xRef = dx+(width/2)
     this.yRef = dy+(width/2)
