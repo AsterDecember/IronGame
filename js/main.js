@@ -73,30 +73,46 @@ window.onload = function () {
             case 38:
                 //arrow up
                 warrior1.dy-= 100
-                warrior1.damageY -=100
-                warrior1.yRef -= 100
-                warrior1.mode = 1
+                if(warrior1.dy< 0){
+                    warrior1.dy = 0
+                }else {
+                    warrior1.damageY -= 100
+                    warrior1.yRef -= 100
+                    warrior1.mode = 1
+                }
                 break
             case 40:
                 //arrow down
                 warrior1.dy+= 100
-                warrior1.damageY+= 100
-                warrior1.yRef += 100
-                warrior1.mode= 2
+                if(warrior1.dy >=700){
+                    warrior1.dy = canvas.height-200
+                }else {
+                    warrior1.damageY += 100
+                    warrior1.yRef += 100
+                    warrior1.mode = 2
+                }
                 break
             case 37:
                 //arrow left
                 warrior1.dx-= 100
-                warrior1.damageX-= 100
-                warrior1.xRef -= 100
-                warrior1.mode = 3
+                if(warrior1.dx<0){
+                    warrior1.dx=0
+                }else {
+                    warrior1.damageX -= 100
+                    warrior1.xRef -= 100
+                    warrior1.mode = 3
+                }
                 break
             case 39:
                 //arrow right
                 warrior1.dx+= 100
-                warrior1.damageX+= 100
-                warrior1.xRef -= 100
-                warrior1.mode = 4
+                if(warrior1.dx>=1100){
+                    warrior1.dx = canvas.width-200
+                }else {
+                    warrior1.damageX += 100
+                    warrior1.xRef -= 100
+                    warrior1.mode = 4
+                }
                 break
             case 190:
                 //dot .
@@ -113,7 +129,7 @@ window.onload = function () {
                 break
             case 88:
                 //dead x
-                warrior1.mode = 8
+                //warrior1.mode = 8
                 break
 
             //Warrior 2
@@ -121,30 +137,46 @@ window.onload = function () {
             case 87:
                 //arrow up
                 warrior2.dy-= 100
-                warrior2.mode = 1
-                warrior2.yRef -= 100
-                warrior2.damageY -=100
+                if(warrior2.dy< 0){
+                    warrior2.dy = 0
+                }else {
+                    warrior2.mode = 1
+                    warrior2.yRef -= 100
+                    warrior2.damageY -= 100
+                }
                 break
             case 83:
                 //arrow down
                 warrior2.dy+= 100
-                warrior2.mode= 2
-                warrior2.yRef += 100
-                warrior2.damageY +=100
+                if(warrior2.dy >=700){
+                    warrior2.dy = canvas.height-200
+                }else {
+                    warrior2.mode = 2
+                    warrior2.yRef += 100
+                    warrior2.damageY += 100
+                }
                 break
             case 65:
                 //arrow left
                 warrior2.dx-= 100
-                warrior2.mode = 3
-                warrior2.xRef -= 100
-                warrior2.damageX -=100
+                if(warrior2.dx<0){
+                    warrior2.dx=0
+                }else {
+                    warrior2.mode = 3
+                    warrior2.xRef -= 100
+                    warrior2.damageX -= 100
+                }
                 break
             case 68:
                 //arrow right
                 warrior2.dx+= 100
-                warrior2.mode = 4
-                warrior2.xRef += 100
-                warrior2.damageX +=100
+                if(warrior2.dx>=1100){
+                    warrior2.dx = canvas.width-200
+                }else {
+                    warrior2.mode = 4
+                    warrior2.xRef += 100
+                    warrior2.damageX += 100
+                }
                 break
             case 81:
                 //Q

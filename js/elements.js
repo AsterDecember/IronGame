@@ -20,8 +20,8 @@ function Element(x,y,src){
 }
 function Background(x,y,src) {
     Element.call(this,x,y,src)
-    this.width = 1024
-    this.height = 768
+    this.width = canvas.width
+    this.height = canvas.height
 }
 
 function  Title(x,y,src) {
