@@ -87,9 +87,7 @@ function Character(sx,sy,dx,dy,width,height,src,){
     this.damageW = 160
     this.imgAtack = new Image()
     this.isTouching = (xRef,yRef) => {
-        console.log(`player cordenates: ${this.damageX},${this.damageY}, XREF:${xRef} YREF:${yRef}`)
         if((xRef > this.damageX && xRef<(this.damageX+this.damageW)) && (yRef>this.damageY && (yRef<(this.damageH+this.damageY))) ){
-            console.log('se estan tocandoo!!')
             return true
         }
 
@@ -115,8 +113,10 @@ function Character(sx,sy,dx,dy,width,height,src,){
         if(this.health <=0){
             console.log('muerto alv')
             this.mode=8
+            return true
         }
-        console.log(this.health)
+        //console.log(this.health)
+        return false
     }
     this.move = function () {
         if(this.moves >0){

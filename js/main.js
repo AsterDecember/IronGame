@@ -46,6 +46,22 @@ function drawBoard(){
 }
 //listeners
 
+//endGame
+function gameOver(){
+    clearInterval(intervalo)
+    intervalo = null
+    ctx.fillStyle = "red"
+    ctx.font = "bold 80px Arial"
+    ctx.fillText("GAME OVER", 50,200)
+    ctx.fillStyle = "black"
+    ctx.font = "bold 40px Arial"
+    //ctx.fillText("Tu score: " + Math.floor(frames/60), 200,300)
+    ctx.font = "bold 20px Arial"
+    ctx.fillText("Presiona 'Return' para reiniciar", 50,350)
+    /*audio.src=music.lost
+    audio.play()*/
+}
+
 //run
 window.onload = function () {
     console.log('waitting')
@@ -84,8 +100,9 @@ window.onload = function () {
                 //space
                 warrior1.atack();
                 if(warrior1.isTouching(warrior2.xRef,warrior2.yRef)){
-                    console.log('yes');
-                    warrior2.recieveDamage(warrior1.atack())
+                    if(warrior2.recieveDamage(warrior1.atack())){
+                        gameOver()
+                    }
                 }
                 break
             case 88:
@@ -100,28 +117,35 @@ window.onload = function () {
                 warrior2.dy-= 100
                 warrior2.mode = 1
                 warrior2.yRef -= 100
+                warrior2.damageY -=100
                 break
             case 83:
                 //arrow down
                 warrior2.dy+= 100
                 warrior2.mode= 2
                 warrior2.yRef += 100
+                warrior2.damageY +=100
                 break
             case 65:
                 //arrow left
                 warrior2.dx-= 100
                 warrior2.mode = 3
                 warrior2.xRef -= 100
+                warrior2.damageX -=100
                 break
             case 68:
                 //arrow right
                 warrior2.dx+= 100
                 warrior2.mode = 4
                 warrior2.xRef += 100
+                warrior2.damageX +=100
                 break
             case 81:
                 //Q
-                warrior1.recieveDamage(warrior2.atack())
+                warrior2.atack();
+                if(warrior2.isTouching(warrior1.xRef,warrior1.yRef)){
+                    console.log(warrior1.recieveDamage(warrior2.atack()))
+                }
                 break
             case 90:
                 //dead z
