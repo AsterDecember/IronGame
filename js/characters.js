@@ -1,5 +1,5 @@
 var images = {
-    normalIceAtk : 'images/atacks/normalIceAtack.png'
+    normalIceAtk : 'images/atacks/iceAtack.png'
 }
 
 
@@ -80,12 +80,10 @@ function Character(sx,sy,dx,dy,width,height,src,){
     //Damage functions
     this.dWidth = width
     this.dHeight = height
-    this.damageX = this.dx-130
-    this.damageXR = this.dx+130
-    this.damageY = this.dy-100
-    this.damageYR = this.dy-100
-    this.damageH = 240
-    this.damageW = 160
+    this.damageX = this.dx-200
+    this.damageY = this.dy
+    this.damageH = 100
+    this.damageW = 500
     this.imgAtack = new Image()
     this.isTouching = (xRef,yRef) => {
         if((xRef > this.damageX && xRef<(this.damageX+this.damageW)) && (yRef>this.damageY && (yRef<(this.damageH+this.damageY))) ){
