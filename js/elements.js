@@ -24,4 +24,10 @@ function Background(x,y,src) {
     this.height = 768
 }
 
+function  Title(x,y,src) {
+    Element.call(this,x,y,src)
+    this.width = 100
+    this.height = 100
+}
+
 //instancias

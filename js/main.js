@@ -1,8 +1,10 @@
-console.log('working')
 
 var elements= {
-    bckg: './images/bckgd.jpg',
-    warrior: './images/RoyalNightWHITE.png',
+    bckg: 'images/woodsBckg.png',
+    royal: 'images/RoyalNightWHITE.png',
+    guillotine: 'images/guillotinecrossWHITE.png',
+    title : 'images/square.png',
+    normalIceAtk : 'images/atacks/normalIceAtack.png',
 }
 
 //variables
@@ -11,8 +13,10 @@ var elements= {
 
 //instances
 var bckg = new Background(0,0,elements.bckg);
-var warriror = new Warrior(0,325,0,0,elements.warrior)
+var warrior1 = new Warrior(0,325,800,600,90,90,elements.royal)
+var warrior2 = new Warrior(0,310,0,600,90,90,elements.royal)
 var intervalo;
+var titles = []
 //main functions
 function start() {
     if(!intervalo) intervalo = setInterval(update,1000/3)
@@ -23,15 +27,106 @@ function update(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }*/
     bckg.draw()
-    warriror.draw()
-    console.log(frames);
+    warrior1.draw()
+    //drawBoard()
+    warrior2.draw()
 }
 //aux functions
-
+function generateBoard(){
+    for(let i=1;i<11;i++){
+        var title = new Title(100*i,200,elements.title)
+        titles.push(title)
+    }
+}
+function drawBoard(){
+    generateBoard()
+    titles.forEach(function(title){
+        title.draw()
+    })
+}
 //listeners
 
 //run
 window.onload = function () {
     console.log('waitting')
     start()
+    addEventListener('keyup',function(e){
+        switch (e.keyCode) {
+            case 38:
+                //arrow up
+                warrior1.dy-= 100
+                warrior1.damageY -=100
+                warrior1.yRef -= 100
+                warrior1.mode = 1
+                break
+            case 40:
+                //arrow down
+                warrior1.dy+= 100
+                warrior1.damageY+= 100
+                warrior1.yRef += 100
+                warrior1.mode= 2
+                break
+            case 37:
+                //arrow left
+                warrior1.dx-= 100
+                warrior1.damageX-= 100
+                warrior1.xRef -= 100
+                warrior1.mode = 3
+                break
+            case 39:
+                //arrow right
+                warrior1.dx+= 100
+                warrior1.damageX+= 100
+                warrior1.xRef -= 100
+                warrior1.mode = 4
+                break
+            case 32:
+                //space
+                warrior1.atack();
+                if(warrior1.isTouching(warrior2.xRef,warrior2.yRef)){
+                    console.log('yes');
+                    warrior2.recieveDamage(warrior1.atack())
+                }
+                break
+            case 88:
+                //dead x
+                warrior1.mode = 8
+                break
+
+            //Warrior 2
+
+            case 87:
+                //arrow up
+                warrior2.dy-= 100
+                warrior2.mode = 1
+                warrior2.yRef -= 100
+                break
+            case 83:
+                //arrow down
+                warrior2.dy+= 100
+                warrior2.mode= 2
+                warrior2.yRef += 100
+                break
+            case 65:
+                //arrow left
+                warrior2.dx-= 100
+                warrior2.mode = 3
+                warrior2.xRef -= 100
+                break
+            case 68:
+                //arrow right
+                warrior2.dx+= 100
+                warrior2.mode = 4
+                warrior2.xRef += 100
+                break
+            case 81:
+                //Q
+                warrior1.recieveDamage(warrior2.atack())
+                break
+            case 90:
+                //dead z
+                warrior2.mode = 8
+                break
+        }
+    })
 }
