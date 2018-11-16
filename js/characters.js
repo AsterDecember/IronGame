@@ -6,7 +6,7 @@ var images = {
 
 //charecter clases
 function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc){
-    this.health = 150
+    this.health = 50
     this.damage = 10
     this.dxHP = dxHP
     this.dyHP = dyHP
@@ -67,7 +67,7 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc){
                 break
             case 7:
                 //TODO:recieve damage
-                this.hpAcc+= (this.hpW*2)
+                this.hpAcc+= (this.hpW*6)
                 ctx.drawImage(this.image,790, 370, this.sWidth, this.sHeight, this.dx, this.dy, this.dWidth, this.dHeight)
                 break
             case 8:
@@ -134,8 +134,9 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc){
         //console.log(this.health)
         return false
     }
-    this.endTurn = function () {
+    this.reset = function () {
         this.moves =5
+        this.health = 150
     }
 }
 

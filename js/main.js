@@ -68,6 +68,8 @@ function gameOver(){
     ctx.font = "bold 40px Arial"
     ctx.font = "bold 20px Arial"
     audio.pause()
+    warrior1.reset()
+    warrior2.reset()
 }
 
 //run
