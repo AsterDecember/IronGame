@@ -10,9 +10,7 @@ var elements= {
     title: 'images/title.png'
 }
 
-//variables
 
-//canvas clases
 
 //instances
 var bckg = new Background(0,0,elements.bckg);
@@ -26,12 +24,8 @@ function start() {
 }
 function update(){
     frames++
-    /*if(frames%150 === 0) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }*/
     bckg.draw()
     warrior1.draw()
-    //drawBoard()
     warrior2.draw()
 }
 //aux functions
@@ -52,10 +46,8 @@ function drawCover() {
     var img = new Image()
     img.src = elements.title
     img.onload = function () {
-        //bg.draw()
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
         ctx.font = "bold 24px Avenir"
-        //ctx.fillText("Presiona la tecla 'Return' para comenzar", 50, 300)
     }
 }
 
@@ -70,11 +62,8 @@ function gameOver(){
     ctx.fillText("GAME OVER", 50,200)
     ctx.fillStyle = "black"
     ctx.font = "bold 40px Arial"
-    //ctx.fillText("Tu score: " + Math.floor(frames/60), 200,300)
     ctx.font = "bold 20px Arial"
-    //ctx.fillText("Presiona 'Return' para reiniciar", 50,350)
-    /*audio.src=music.lost
-    audio.play()*/
+
 }
 
 //run

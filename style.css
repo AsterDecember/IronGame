@@ -5,9 +5,12 @@ html, body {
     background-color: #222425;
 }
 
+canvas{
+    padding: 10px;
+}
 .instructions{
-    width: 80%;
-    height: 40%;
+    width: 90%;
+    height: 30%;
 }
 .container{
     width: 100%;
