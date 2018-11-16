@@ -18,8 +18,12 @@ var warrior1 = new Warrior(0,325,800,300,90,90,elements.royal,10,10,elements.ice
 var warrior2 = new Warrior(0,310,0,300,90,90,elements.royal,700,10,elements.fire)
 var intervalo;
 var titles = []
+var audio = document.createElement('AUDIO')
+
 //main functions
 function start() {
+    audio.src = 'assets/audio.mp3'
+    audio.play()
     if(!intervalo) intervalo = setInterval(update,1000/3)
 }
 function update(){
@@ -63,7 +67,7 @@ function gameOver(){
     ctx.fillStyle = "black"
     ctx.font = "bold 40px Arial"
     ctx.font = "bold 20px Arial"
-
+    audio.pause()
 }
 
 //run
