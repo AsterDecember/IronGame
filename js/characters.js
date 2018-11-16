@@ -6,7 +6,7 @@ var images = {
 
 //charecter clases
 function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc){
-    this.health = 160
+    this.health = 150
     this.damage = 10
     this.dxHP = dxHP
     this.dyHP = dyHP
@@ -16,6 +16,8 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc){
     this.sHeight = height
     this.dx = dx
     this.dy = dy
+    this.specialFlag = false
+    this.specialAcc = 0;
     this.atackFlag = false
     //reference to recieve damage
     this.xRef = dx+(width/2)
@@ -113,10 +115,14 @@ function Character(sx,sy,dx,dy,width,height,src,dxHP,dyHP,typesrc){
         return this.damage
     }
     this.specialAtack = function () {
+        this.mode=5
+        ctx.drawImage(this.imgAtack,this.damageX,this.damageY,this.damageW,this.damageH)
+        setTimeout(()=> this.mode=6, 3000);
         return this.damage*3
     }
     this.recieveDamage = function (damage) {
         this.mode=7
+        this.specialAcc ++;
         setTimeout(()=> this.mode=6 , 1000);
         this.health -= damage
         if(this.health <=0){

@@ -7,6 +7,7 @@ var elements= {
     normalIceAtk : 'images/atacks/normalIceAtack.png',
     fire: 'images/atacks/fireAtack.png',
     ice: 'images/atacks/iceAtack.png',
+    title: 'images/title.png'
 }
 
 //variables
@@ -46,6 +47,18 @@ function drawBoard(){
         title.draw()
     })
 }
+
+function drawCover() {
+    var img = new Image()
+    img.src = elements.title
+    img.onload = function () {
+        //bg.draw()
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+        ctx.font = "bold 24px Avenir"
+        //ctx.fillText("Presiona la tecla 'Return' para comenzar", 50, 300)
+    }
+}
+
 //listeners
 
 //endGame
@@ -67,11 +80,19 @@ function gameOver(){
 //run
 window.onload = function () {
     console.log('waitting')
-    start()
+    drawCover()
     addEventListener('keyup',function(e){
+        var star = 0
         switch (e.keyCode) {
+            case 13:
+                star++;
+                if(star<2){
+                    document.getElementById('instructions').style.display = 'none'
+                    start()
+                }
             case 38:
                 //arrow up
+                e.preventDefault()
                 warrior1.dy-= 100
                 if(warrior1.dy< 0){
                     warrior1.dy = 0
@@ -83,6 +104,7 @@ window.onload = function () {
                 break
             case 40:
                 //arrow down
+                e.preventDefault()
                 warrior1.dy+= 100
                 if(warrior1.dy >=700){
                     warrior1.dy = canvas.height-200
@@ -94,6 +116,7 @@ window.onload = function () {
                 break
             case 37:
                 //arrow left
+                e.preventDefault()
                 warrior1.dx-= 100
                 if(warrior1.dx<0){
                     warrior1.dx=0
@@ -105,6 +128,7 @@ window.onload = function () {
                 break
             case 39:
                 //arrow right
+                e.preventDefault()
                 warrior1.dx+= 100
                 if(warrior1.dx>=1100){
                     warrior1.dx = canvas.width-200
@@ -119,14 +143,19 @@ window.onload = function () {
                 if(!warrior1.atackFlag) {
                     warrior1.atackFlag = true
                     setTimeout(() => warrior1.atackFlag = false,1500)
-                    warrior1.atack();
+                    warrior1.atack()
                     if (warrior1.isTouching(warrior2.xRef, warrior2.yRef)) {
+                        warrior1.specialAcc +=2;
                         if (warrior2.recieveDamage(warrior1.atack())) {
                             gameOver()
                         }
                     }
                 }
                 break
+            case 189:
+                if(warrior1.specialFlag){
+                    warrior1.specialAtack()
+                }
             case 88:
                 //dead x
                 //warrior1.mode = 8
@@ -198,3 +227,4 @@ window.onload = function () {
         }
     })
 }
+drawCover()
